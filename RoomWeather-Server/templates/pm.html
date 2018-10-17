@@ -14,7 +14,7 @@
 <div class="head_box" style="background: rgb(73, 61, 61);"><!--最上面的颜色-->
     <div class="head clearfix">
         <a class="logo">
-            <img src="{{ url_for('static', filename='res/RoomWeather.png') }}" alt="RoomWeather" height="31">
+            <img src="static/res/RoomWeather.png" alt="RoomWeather" height="31">
         </a>
     </div>
 </div>
@@ -88,7 +88,7 @@
             {
                 type: 'category',
                 boundaryGap: false,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: {{days|tojson}}
             }
         ],
         yAxis: [
