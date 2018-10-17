@@ -1,0 +1,52 @@
+/* ************************************************************************* **
+ * css reset
+ * ************************************************************************* */
+body {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+body,
+dl,
+dd,
+ul,
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+ul {
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after { clear: both; }
+/* ************************************************************************* **
+ * skin
+ * ************************************************************************* */
+ /* 雷 */
+#thunder {background: #673a87 url(../../images/skin/thunder.jpg?v=2015-12-30) no-repeat center top;}
+/* 霾     */
+#haze {background: #c8976a url(../../images/skin/haze.jpg?v=2015-12-30) no-repeat center top;}
+/* 沙尘暴 */
+#sandstorm {background: #eba768 url(../../images/skin/sandstorm.jpg?v=2015-12-30) no-repeat center top;}
+/* 雾     */
+#fog {background: #eba768 url(../../images/skin/fog.jpg?v=2015-12-30) no-repeat center top;}
+/* 雪     */
+#snow {background: #eba768 url(../../images/skin/snow.jpg?v=2015-12-30) no-repeat center top;}
+/* 雨天   */
+#rain {background: #eba768 url(../../images/skin/rain.jpg?v=2015-12-30) no-repeat center top;}
+/* 阴天   */
+#overcast {background: #eba768 url(../../images/skin/overcast.jpg?v=2015-12-30) no-repeat center top;}
+/* 多云   */
+#cloudy {background: #eba768 url(../../images/skin/cloudy.jpg?v=2015-12-30) no-repeat center top;}
+/* 夜晚   */
+#night {background: #eba768 url(../../images/skin/night.jpg?v=2015-12-30) no-repeat center top;}
+/* 晴天   */
+#sunny {background: #eba768 url(../../images/skin/sunny.jpg?v=2015-12-30) no-repeat center top;}

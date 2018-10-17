@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>RoomWeather-PM page</title>
+    <link rel="stylesheet" href="static/css/pm_reset.css" charset="utf-8">
+    <link rel="stylesheet" href="static/css/pm_index.css" charset="utf-8">
+    <link rel="stylesheet" href="static/css/pm_chanle.css" charset="utf-8">
+    <script src="static/js/echarts.js"></script>
+</head>
+
+<body style="background: rgb(73, 61, 61);"><!--最下面的颜色-->
+<div class="head_box" style="background: rgb(73, 61, 61);"><!--最上面的颜色-->
+    <div class="head clearfix">
+        <a class="logo">
+            <img src="{{ url_for('static', filename='res/RoomWeather.png') }}" alt="RoomWeather" height="31">
+        </a>
+    </div>
+</div>
+<div id="aqi" class="clearfix" style="background: rgb(214, 174, 43);"><!--中间的颜色-->
+    <div id="info_box">
+        <div id="search">
+        </div>
+    </div>
+    <div class="wrap clearfix">
+        <div id="aqi_info">
+            <div class="aqi_info_detail">
+                <em id="aqi_value">{{aqi}}</em>
+                <span id="aqi_desc" style="background: rgb(214, 174, 43);">良</span><!--中间字体的颜色-->
+            </div>
+            <div class="aqi_info_item">
+                <ul class="clearfix">
+                    <li>
+                        <em>PM2.5</em>
+                        <span>{{pm25}}</span>
+                    </li>
+                    <li>
+                        <em>PM10</em>
+                        <span>{{pm10}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="aqi_info_time">
+                <h1>Current AQI</h1>
+                <b>发布日期：{{time}}</b>
+            </div>
+            <dl class="aqi_info_tips">
+                <dt>温馨提醒 :</dt>
+                <dd id="aqi-tips">极少数异常敏感人群应减少户外活动。</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="wrap clearfix">
+        <div class="left">
+            <div id="pm25" style="width: 800px;height:500px;margin: 0 auto;">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var ChartPM = echarts.init(document.getElementById('pm25'));
+    var ChartPMOption = {
+        title: {
+            text: '7天内PM2.5变化',
+            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['最高PM', '最低PM']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} mg/m3'
+                }
+            }
+        ],
+        series: [
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: 'PM2.5',
+                type: 'line',
+                data: [101, 101, 105, 103, 120, 103, 100],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: 'PM10',
+                type: 'line',
+                data: [140, 138, 150, 160, 135, 128, 134],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    ChartPM.setOption(ChartPMOption);
+</script>
+
+
+</body>
+
+</html>
