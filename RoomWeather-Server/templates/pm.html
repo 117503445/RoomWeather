@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -53,20 +53,93 @@
     </div>
     <div class="wrap clearfix">
         <div class="left">
-            <div id="pm25" style="width: 800px;height:500px;margin: 0 auto;">
-
+            <div id="pm7h" style="width: 800px;height:500px;margin: 0 auto;">
             </div>
-
+            <p></p>
+            <div id="pm7d" style="width: 800px;height:500px;margin: 0 auto;">
+            </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    var ChartPM = echarts.init(document.getElementById('pm25'));
-    var ChartPMOption = {
+    var ChartPM7h = echarts.init(document.getElementById('pm7h'));
+    var ChartPM7d=echarts.init(document.getElementById('pm7d'));
+    var ChartPM7hOption = {
+        title: {
+            text: '7小时内PM2.5变化',
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['最高PM', '最低PM']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: {{hours|tojson}}
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} mg/m3'
+                }
+            }
+        ],
+        series: [
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: 'PM2.5',
+                type: 'line',
+                data: {{last7hPm25}},
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: 'PM10',
+                type: 'line',
+                data: {{last7hPm10}},
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    var ChartPM7dOption = {
         title: {
             text: '7天内PM2.5变化',
-            subtext: '纯属虚构'
         },
         tooltip: {
             trigger: 'axis'
@@ -104,7 +177,7 @@
                 smooth: true,  //true 为平滑曲线，false为直线
                 name: 'PM2.5',
                 type: 'line',
-                data: [101, 101, 105, 103, 120, 103, 100],
+                data: {{last7dPm25}},
                 markPoint: {
                     data: [
                         {type: 'max', name: '最大值'},
@@ -121,7 +194,7 @@
                 smooth: true,  //true 为平滑曲线，false为直线
                 name: 'PM10',
                 type: 'line',
-                data: [140, 138, 150, 160, 135, 128, 134],
+                data: {{last7dPm10}},
                 markPoint: {
                     data: [
                         {type: 'max', name: '最大值'},
@@ -136,7 +209,8 @@
             }
         ]
     };
-    ChartPM.setOption(ChartPMOption);
+    ChartPM7h.setOption(ChartPM7hOption);
+    ChartPM7d.setOption(ChartPM7dOption);
 </script>
 
 

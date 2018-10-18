@@ -42,7 +42,7 @@ def loadTestData():
 
     # 返回数组的数组
 
-
+# 获取一组数据的平均值
 def getAverage(datas: list):
     # fake data
     if len(datas) == 0:
@@ -57,7 +57,7 @@ def getAverage(datas: list):
     return average
 
 
-def getLast7HoursData():
+def getLast7hData():
     datas = loadTestData()
     now = datetime.datetime.now()
     # print(now.timestamp())
@@ -76,20 +76,40 @@ def getLast7HoursData():
     averages.reverse()
     return averages
 
-    # 获取一组数据的平均值
 
+def getLast7dData():
+    datas = loadTestData()
+    now = datetime.datetime.now()
+    # print(now.timestamp())
+    now = now.replace(minute=0, second=0, microsecond=0).timestamp()
+    # print(now)
+    currentDatass = [[], [], [], [], [], [], []]
+    for data in datas:
+        for i in range(7):
+            if int(now) - 3600*24 * i <= int(data[0]) and int(data[0]) < int(now) - 3600 *24* i + 3600:
+                currentDatass[i].append(data)
+    averages = [0, 0, 0, 0, 0, 0, 0]
+    for i in range(7):
+        print("### " + str(i))
+        averages[i] = getAverage(currentDatass[i])
+        print(averages[i])
+    averages.reverse()
+    return averages
 
 def getLastPM():
     datas = loadTestData()
-
+    print(float([len(datas) - 1][0]))
+    #print(datas)
     if len(datas) == 0:
         return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), fakeData(4), fakeData(5)
-    time = datetime.datetime.fromtimestamp(float([len(datas) - 1][0]))
+    time = datetime.datetime.fromtimestamp(float(datas[len(datas) - 1][0]))
     pm25, pm10 = datas[len(datas) - 1][4], datas[len(datas) - 1][5]
     return time, pm25, pm10
 
 
 if __name__ == '__main__':
-    # createTestData()
+    createTestData()
+    i=getLast7hData()
+    print(i)
     # print(d)
     print('Program Finished')
