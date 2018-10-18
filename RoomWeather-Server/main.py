@@ -106,4 +106,4 @@ if __name__ == '__main__':
         os.mkdir(dir_data)
     # timer = threading.Timer(1, fun_timer)
     # timer.start()
-    app.run('0.0.0.0', 800, debug=True)
+    app.run('0.0.0.0', 80, debug=True)
