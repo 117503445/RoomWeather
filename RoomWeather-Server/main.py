@@ -12,7 +12,7 @@ dir_data = sys.path[0] + '/data'
 file_data = dir_data + '/' + 'pi.txt'
 
 lastAccessTimeStamp = 0
-time, lastPm25, lastPm10, aqi = 0, 0, 0, 0
+time, lastPm25, lastPm10, aqi, aqiText = 0, 0, 0, 0, ''
 last7hPm25, last7hPm10, last7dPm25, last7dPm10, days, hours = [], [], [], [], [], []
 
 
@@ -42,21 +42,21 @@ def getHours():
 
 # 输入最近用户的时间戳
 def checkUpdate(t):
-    global lastAccessTimeStamp, time, lastPm25, lastPm10, aqi, days,hours
+    global lastAccessTimeStamp, time, lastPm25, lastPm10, aqi, aqiText, days, hours
     global last7hPm25, last7hPm10, last7dPm25, last7dPm10
     if t - lastAccessTimeStamp > 1200:
         print('UpdateData,time={}'.format(datetime.datetime.now()))
         time, lastPm25, lastPm10 = data.getLastPM()
-        aqi = crawler.getAQI()
+        aqi, aqiText = crawler.getAQIAndAQIText()
         days = getDays()
         hours = getHours()
         last7hPm25, last7hPm10, last7dPm25, last7dPm10 = [], [], [], []
 
-        last7hData = data.getLast7hData()
+        last7hData = data.getLast7dhData(0)
         for d in last7hData:
             last7hPm25.append(d[4])
             last7hPm10.append(d[5])
-        last7dData = data.getLast7dData()
+        last7dData = data.getLast7dhData(1)
         for d in last7dData:
             last7dPm25.append(d[4])
             last7dPm10.append(d[5])
@@ -76,8 +76,9 @@ def index():
 @app.route('/pm')
 def pm():
     checkUpdate(datetime.datetime.now().timestamp())
-    return render_template('pm.html', aqi=aqi, time=time, pm25=lastPm25, pm10=lastPm10, days=days, hours=hours,
-                           last7hPm25=last7hPm25, last7hPm10=last7hPm10, last7dPm25=last7dPm25,last7dPm10=last7dPm10)
+    return render_template('pm.html', aqi=aqi, aqiText=aqiText, time=time, pm25=lastPm25, pm10=lastPm10, days=days,
+                           hours=hours,
+                           last7hPm25=last7hPm25, last7hPm10=last7hPm10, last7dPm25=last7dPm25, last7dPm10=last7dPm10)
 
 
 @app.route('/otherInfo')

@@ -27,7 +27,7 @@
         <div id="aqi_info">
             <div class="aqi_info_detail">
                 <em id="aqi_value">{{aqi}}</em>
-                <span id="aqi_desc" style="background: rgb(214, 174, 43);">良</span><!--中间字体的颜色-->
+                <span id="aqi_desc" style="background: rgb(214, 174, 43);">{{aqiText}}</span><!--中间字体的颜色-->
             </div>
             <div class="aqi_info_item">
                 <ul class="clearfix">
@@ -47,16 +47,16 @@
             </div>
             <dl class="aqi_info_tips">
                 <dt>温馨提醒 :</dt>
-                <dd id="aqi-tips">极少数异常敏感人群应减少户外活动。</dd>
+                <dd id="aqi-tips">请关注睡眠环境的空气质量</dd>
             </dl>
         </div>
     </div>
     <div class="wrap clearfix">
         <div class="left">
-            <div id="pm7h" style="width: 800px;height:500px;margin: 0 auto;">
+            <div id="pm7h" style="width: 1000px;height:400px;margin: 0 auto;">
             </div>
             <p></p>
-            <div id="pm7d" style="width: 800px;height:500px;margin: 0 auto;">
+            <div id="pm7d" style="width: 1000px;height:400px;margin: 0 auto;">
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
     var ChartPM7d=echarts.init(document.getElementById('pm7d'));
     var ChartPM7hOption = {
         title: {
-            text: '7小时内PM2.5变化',
+            text: '7小时内PM变化',
         },
         tooltip: {
             trigger: 'axis'
@@ -139,7 +139,7 @@
     };
     var ChartPM7dOption = {
         title: {
-            text: '7天内PM2.5变化',
+            text: '7天内PM变化',
         },
         tooltip: {
             trigger: 'axis'
