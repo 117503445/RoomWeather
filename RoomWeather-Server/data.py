@@ -1,7 +1,9 @@
 import datetime
 import random
-
-
+import sys
+dir_data = sys.path[0] + '/data'
+file_data = dir_data + '/pi.txt'
+file_testData=dir_data + '/test.txt'
 def fakeData(i):
     if i == 1:
         return random.randint(18, 25)
@@ -17,18 +19,22 @@ def fakeData(i):
 
 def createTestData():
     now = datetime.datetime.now()
-    with open('data.txt', 'w') as f:
+    with open(file_testData, 'w') as f:
         f.write('')
     for i in range(100, -1, -1):
-        with open('data.txt', 'a') as f:
+        with open(file_testData, 'a') as f:
             delta = datetime.timedelta(minutes=10 * i)
             f.write(
                 '{:.0f}\t{}\t{}\t{}\t{}\t{}\n'.format((now - delta).timestamp(), fakeData(1), fakeData(2), fakeData(3),
                                                       fakeData(4), fakeData(5)))
 
 
-def loadTestData():
-    with open('data.txt', 'r') as f:
+def loadTestData(debug=False):
+    if debug:
+        d=file_testData
+    else:
+        d=file_data
+    with open(d, 'r') as f:
         s = f.readlines()
     datas = []
     for i in s:
