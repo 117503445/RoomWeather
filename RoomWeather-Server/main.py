@@ -116,7 +116,9 @@ def Submitdata(time, temperature, humidity, airpressure, pm25, pm10):
 @app.route('/test')
 def test():
     return render_template('test.html', data=[1, 2, 3])
-
+@app.route('/Thanks')
+def Thanks():
+    return render_template('Thanks.html')
 
 if __name__ == '__main__':
     if (not os.path.exists(dir_data)):
