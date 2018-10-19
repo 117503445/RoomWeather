@@ -73,7 +73,7 @@
             trigger: 'axis'
         },
         legend: {
-            data: ['最高温度', '最低温度']
+            data: ['最高温湿度', '最低温湿度']
         },
         toolbox: {
             show: true,
@@ -96,7 +96,7 @@
             {
                 type: 'value',
                 axisLabel: {
-                    formatter: '{value} ℃'
+                    formatter: '{value} ℃/%'
                 }
             }
         ],
@@ -139,13 +139,13 @@
     };
     var ChartInfo7dOption = {
         title: {
-            text: '7天内PM变化',
+            text: '7天内温湿度变化',
         },
         tooltip: {
             trigger: 'axis'
         },
         legend: {
-            data: ['最高PM', '最低PM']
+            data: ['最高温湿度', '最低温湿度']
         },
         toolbox: {
             show: true,
@@ -168,14 +168,14 @@
             {
                 type: 'value',
                 axisLabel: {
-                    formatter: '{value} mg/m3'
+                    formatter: '{value} ℃/%'
                 }
             }
         ],
         series: [
             {
                 smooth: true,  //true 为平滑曲线，false为直线
-                name: 'PM2.5',
+                name: '温度',
                 type: 'line',
                 data: {{last7dTemp}},
                 markPoint: {
@@ -192,7 +192,7 @@
             },
             {
                 smooth: true,  //true 为平滑曲线，false为直线
-                name: 'PM10',
+                name: '湿度',
                 type: 'line',
                 data: {{last7dHum}},
                 markPoint: {

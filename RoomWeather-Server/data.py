@@ -37,7 +37,6 @@ def loadTestData():
         for i in range(len(data)):
             if data[i] == "null" or data[i] == "lonely":
                 data[i] = fakeData(i)
-
     return datas
 
     # 返回数组的数组
@@ -76,9 +75,9 @@ def getLast7dhData(index: int):
                     currentDatass[i].append(data)
     averages = [0, 0, 0, 0, 0, 0, 0]
     for i in range(7):
-        print("### " + str(i))
+        #print("### " + str(i))
         averages[i] = getAverage(currentDatass[i])
-        print(averages[i])
+        #print(averages[i])
     averages.reverse()
     return averages
 
@@ -92,6 +91,8 @@ def getLastData():
 
 
 if __name__ == '__main__':
+    print(getLastData())
+    exit()
     createTestData()
     # i = getLast7dhData()
     # print(i)

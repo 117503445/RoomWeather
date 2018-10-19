@@ -6,7 +6,7 @@ def getAQIAndAQIText():
     try:
         res = requests.get(r'''https://tianqi.moji.com/weather/china/shaanxi/chang'an-district''')
         html = etree.HTML(res.text)
-        print(res.text)
+        #print(res.text)
         result = html.xpath('/html/body/div/div/div/ul/li/a/em')
         aqi = str((result[0].text)).split(' ')[0]
         aqiText=str((result[0].text)).split(' ')[1]

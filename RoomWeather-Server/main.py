@@ -44,7 +44,8 @@ def getHours():
 # 输入最近用户的时间戳
 def checkUpdate():
     now = datetime.datetime.now().timestamp()
-    global lastAccessTimeStamp, time, lastPm25, lastPm10, aqi, aqiText, days, hours
+    global lastAccessTimeStamp, aqi, aqiText, days, hours
+    global time, lastTemp, lastHum, lastPm25, lastPm10
     global last7hPm25, last7hPm10, last7dPm25, last7dPm10
     global last7hTemp, last7hHum, last7dTemp, last7hHum
 
@@ -60,12 +61,16 @@ def checkUpdate():
         last7hTemp, last7hHum, last7dTemp, last7hHum = [], [], [], []
 
         last7hData = data.getLast7dhData(0)
+        last7dData = data.getLast7dhData(1)
         for d in last7hData:
-
+            last7hTemp.append(d[1])
+            last7hHum.append(d[2])
             last7hPm25.append(d[4])
             last7hPm10.append(d[5])
-        last7dData = data.getLast7dhData(1)
+
         for d in last7dData:
+            last7dTemp.append(d[1])
+            last7dHum.append(d[2])
             last7dPm25.append(d[4])
             last7dPm10.append(d[5])
 
