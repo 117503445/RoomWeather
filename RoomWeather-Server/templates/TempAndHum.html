@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>TEMP & HUM Page</title>
+    <link rel="stylesheet" href="static/css/pm_reset.css" charset="utf-8">
+    <link rel="stylesheet" href="static/css/pm_index.css" charset="utf-8">
+    <link rel="stylesheet" href="static/css/pm_chanle.css" charset="utf-8">
+    <script src="static/js/echarts.js"></script>
+</head>
+
+<body style="background: rgb(73, 61, 61);"><!--最下面的颜色-->
+<div class="head_box" style="background: rgb(73, 61, 61);"><!--最上面的颜色-->
+    <div class="head clearfix">
+        <a class="logo">
+            <img src="static/res/RoomWeather.png" alt="RoomWeather" height="31">
+        </a>
+    </div>
+</div>
+<div id="aqi" class="clearfix" style="background: rgb(214, 174, 43);"><!--中间的颜色-->
+    <div id="info_box">
+        <div id="search">
+        </div>
+    </div>
+    <div class="wrap clearfix">
+        <div id="aqi_info">
+            <div class="aqi_info_detail">
+                <em id="aqi_value">{{aqi}}</em>
+                <span id="aqi_desc" style="background: rgb(214, 174, 43);">{{aqiText}}</span><!--中间字体的颜色-->
+            </div>
+            <div class="aqi_info_item">
+                <ul class="clearfix">
+                    <li>
+                        <em>温度</em>
+                        <span>{{lastTemp}}</span>
+                    </li>
+                    <li>
+                        <em>湿度</em>
+                        <span>{{lastHum}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="aqi_info_time">
+                <h1>Current AQI</h1>
+                <b>发布日期：{{time}}</b>
+            </div>
+            <dl class="aqi_info_tips">
+                <dt>温馨提醒 :</dt>
+                <dd id="aqi-tips">请关注睡眠环境的空气质量</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="wrap clearfix">
+        <div class="left">
+            <div id="info7h" style="width: 1000px;height:400px;margin: 0 auto;">
+            </div>
+            <p></p>
+            <div id="info7d" style="width: 1000px;height:400px;margin: 0 auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var ChartInfo7h = echarts.init(document.getElementById('info7h'));
+    var ChartInfo7d=echarts.init(document.getElementById('info7d'));
+    var ChartInfo7hOption = {
+        title: {
+            text: '7小时内温度变化',
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['最高温度', '最低温度']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: {{hours|tojson}}
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} ℃'
+                }
+            }
+        ],
+        series: [
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: '温度',
+                type: 'line',
+                data: {{last7hTemp}},
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: '湿度',
+                type: 'line',
+                data: {{last7hHum}},
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    var ChartInfo7dOption = {
+        title: {
+            text: '7天内PM变化',
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['最高PM', '最低PM']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: {{days|tojson}}
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} mg/m3'
+                }
+            }
+        ],
+        series: [
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: 'PM2.5',
+                type: 'line',
+                data: {{last7dTemp}},
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                smooth: true,  //true 为平滑曲线，false为直线
+                name: 'PM10',
+                type: 'line',
+                data: {{last7dHum}},
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+    ChartInfo7h.setOption(ChartInfo7hOption);
+    ChartInfo7d.setOption(ChartInfo7dOption);
+</script>
+
+
+</body>
+
+</html>

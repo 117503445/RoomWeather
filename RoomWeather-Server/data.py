@@ -57,8 +57,9 @@ def getAverage(datas: list):
         average[i] = int(average[i] / len(datas))
     return average
 
-#0是7hours,1是7days
-def getLast7dhData(index:int):
+
+# 0是7hours,1是7days
+def getLast7dhData(index: int):
     datas = loadTestData()
     now = datetime.datetime.now()
     # print(now.timestamp())
@@ -67,7 +68,7 @@ def getLast7dhData(index:int):
     currentDatass = [[], [], [], [], [], [], []]
     for data in datas:
         for i in range(7):
-            if index==0:
+            if index == 0:
                 if int(now) - 3600 * i <= int(data[0]) and int(data[0]) < int(now) - 3600 * i + 3600:
                     currentDatass[i].append(data)
             else:
@@ -82,22 +83,18 @@ def getLast7dhData(index:int):
     return averages
 
 
-
-
-def getLastPM():
+def getLastData():
     datas = loadTestData()
-    print(float([len(datas) - 1][0]))
     # print(datas)
     if len(datas) == 0:
         return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), fakeData(4), fakeData(5)
-    time = datetime.datetime.fromtimestamp(float(datas[len(datas) - 1][0]))
-    pm25, pm10 = datas[len(datas) - 1][4], datas[len(datas) - 1][5]
-    return time, pm25, pm10
+    return datas[len(datas) - 1]
 
 
 if __name__ == '__main__':
     createTestData()
-    i = getLast7dhData()
-    print(i)
-    # print(d)
+    # i = getLast7dhData()
+    # print(i)
+    d = getLastData()
+    print(d)
     print('Program Finished')
