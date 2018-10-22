@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="static/css/pm_index.css" charset="utf-8">
     <link rel="stylesheet" href="static/css/pm_chanle.css" charset="utf-8">
     <script src="static/js/echarts.js"></script>
+    <style type="text/css">
+        em{}
+    </style>
 </head>
 
 <body style="background: rgb(214, 174, 43);"><!--最下面的颜色-->
-<div class="head_box" style="background: rgb(73, 61, 61);"><!--最上面的颜色-->
+<div class="head_box" style="background-color:slategray;"><!--最上面的颜色-->
     <div class="head clearfix">
         <a class="logo" href="/">
             <img src="static/res/RoomWeather.png" alt="RoomWeather" height="31">
         </a>
     </div>
 </div>
-<div id="aqi" class="clearfix" style="background: rgb(214, 174, 43);"><!--中间的颜色-->
+<div id="aqi" class="clearfix" style="background: whitesmoke;"><!--中间的颜色-->
     <div id="info_box">
         <div id="search">
         </div>
@@ -26,28 +29,28 @@
     <div class="wrap clearfix">
         <div id="aqi_info">
             <div class="aqi_info_detail">
-                <em id="aqi_value">{{aqi}}</em>
-                <span id="aqi_desc" style="background: rgb(214, 174, 43);">{{aqiText}}</span><!--中间字体的颜色-->
+                <em id="aqi_value" style="color: black">{{aqi}}</em>
+                <span id="aqi_desc" style="background-color:slategray;">{{aqiText}}</span><!--中间字体的颜色-->
             </div>
             <div class="aqi_info_item">
                 <ul class="clearfix">
                     <li>
-                        <em>PM2.5</em>
-                        <span>{{pm25}}</span>
+                        <em style="color: black">PM2.5</em>
+                        <span style="color: black">{{pm25}}</span>
                     </li>
                     <li>
-                        <em>PM10</em>
-                        <span>{{pm10}}</span>
+                        <em style="color: black">PM10</em>
+                        <span style="color: black">{{pm10}}</span>
                     </li>
                 </ul>
             </div>
             <div class="aqi_info_time">
-                <h1>Current AQI</h1>
-                <b>发布日期：{{time}}</b>
+                <h1 style="color: black">Current AQI</h1>
+                <b style="color: black">发布日期：{{time}}</b>
             </div>
             <dl class="aqi_info_tips">
-                <dt>温馨提醒 :</dt>
-                <dd id="aqi-tips">请关注睡眠环境的空气质量</dd>
+                <dt style="color: black">温馨提醒 :</dt>
+                <dd id="aqi-tips" style="color: black">请关注睡眠环境的空气质量</dd>
             </dl>
         </div>
     </div>
