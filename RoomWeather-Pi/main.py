@@ -4,6 +4,7 @@ import time
 import dht11
 import sds011
 import os
+import led
 ip = 'http://192.168.31.28:80'
 sleeptime = 10  # Seconds
 urls = []
@@ -22,9 +23,19 @@ def submitURL(url):
             return
 
 
+def lightLed(pm25):
+    if pm25<=50:
+        led.light(0)
+    elif 50<pm25 and pm25<=100:
+        led.light(1)
+    elif 100<pm25:
+        led.light(2)
+        
+
+
 if __name__ == '__main__':
     if not debug:
-        ip='http://weather.liu7moon.top:800'
+        ip='http://47.107.66.50'
         sleeptime=600
 
 
@@ -51,6 +62,7 @@ if __name__ == '__main__':
         url += "{0}&{1}&{2}&{3}&{4}&{5}".format(timestamp, str(
             temper), str(hum), str(airpress), str(pm25), pm10)
         print(url)
+        lightLed(pm25)
         submitURL(url)
         print('Go to sleep')
         time.sleep(sleeptime)

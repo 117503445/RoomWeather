@@ -121,9 +121,11 @@ def GetPM():
     values = [0, 0]
     pm25s = []
     while True:
+        print('Begin sds011 loop')
         cmd_set_sleep(0)
         cmd_set_mode(1)
         values = cmd_query_data()  # get data
+        print(values)
         if values is not None:  # i data != null or 0
             if len(values) >= 2:
                 if values[0] != 0:
@@ -138,6 +140,7 @@ def GetPM():
                             pm25s.append(values[0])
                     else:
                         pm25s.append(values[0])
+        print('sds011 sleep')
         time.sleep(1)
 
 
